@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title><%= title %></title>
+        <%- include("../bootstrap") %>
+    </head>
+
+    <body>
+        <%- include("../topbar") %>
+        <h2 class="col-auto">Admin stuff</h2>
+        <table class="table table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Namn</th>
+                    <th scope="col">Biljetttyp</th>
+                    <th scope="col">Sittplats</th>
+                    <th scope="col">Betald</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const book of bookings) { %>
+                <tr>
+                    <td><%= `${book.User.Name} ${book.User.Surname}` %></td>
+                    <td><%= book.Type %></td>
+                    <td><%= book.SeatId ? book.SeatId : "-" %></td>
+                    <td><%= book.Paid ? "ja" : "nej" %></td>
+                    <% if (!book.Paid) { %>
+                    <td>
+                        <form
+                            id="markPaid"
+                            action="/api/v1/bookings/paid"
+                            method="post"
+                        >
+                            <div class="row">
+                                <div class="col">
+                                    <input
+                                        hidden
+                                        type="text"
+                                        name="booking"
+                                        id=""
+                                        value="<%= book.Id %>"
+                                    />
+                                    <input
+                                        name="reason"
+                                        type="text"
+                                        placeholder="anledning"
+                                        class="form-control"
+                                    />
+                                </div>
+                                <div class="col">
+                                    <button
+                                        class="btn btn-primary"
+                                        type="submit"
+                                    >
+                                        Markera som betald
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+
+                    <% } else { %>
+                    <td><%= book.SwishId %></td>
+                    <% } %>
+                    <td>
+                        <form
+                            id="removeBooking"
+                            action="/api/v1/bookings/remove"
+                            method="post"
+                        >
+                            <input
+                                hidden
+                                type="text"
+                                name="booking"
+                                id=""
+                                value="<%= book.Id %>"
+                            />
+                            <input
+                                hidden
+                                type="text"
+                                name="userId"
+                                id=""
+                                value="<%= book.User.Id %>"
+                            />
+                            <button class="btn btn-danger" type="submit">
+                                avboka
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+</html>

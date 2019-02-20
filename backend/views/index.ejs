@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Homepage.">
+    <%- include("bootstrap") %>
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <%- include("topbar") %>
+
+    <div style="margin-top: 1rem;" class="container">
+        <div class="row align-items-center card-deck">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Turneringar</h4>
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <% for (const game of games) { %>
+                    <li class="list-group-item">
+                        <%= game %>
+                    </li>
+                    <% } %>
+                </ul>
+                <div class="card-body">
+                    <p class="card-text">
+                        Placeholer info om turneringar etc.
+                    </p>
+                    <a href="#" class="btn btn-primary">Gå med i turnering</a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 1rem;" class="row align-items-center card-deck">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Generell Information</h1>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Some quick example text to build on the card title
+                        and make up the bulk of the card's content.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

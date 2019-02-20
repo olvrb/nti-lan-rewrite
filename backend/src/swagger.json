@@ -1,0 +1,49 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API for https://nti-lan.xyz",
+        "version": "1.0.0",
+        "title": "Swagger Petstore",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "apiteam@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "nti-lan.xyz",
+    "basePath": "/",
+    "tags": [{
+        "name": "auth",
+        "description": "Everything about auth."
+    }, {
+        "name": "bookings",
+        "description": "Everything about bookings."
+    }],
+    "schemes": ["https"],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "summary": "Login and create a new session.",
+                "description": "Login and create a new session.",
+                "parameters": [{
+                    "name": "email",
+                    "in": "body",
+                    "description": "email",
+                    "type": "string"
+                }, {
+                    "name": "password",
+                    "in": "body",
+                    "description": "password",
+                    "type": "string"
+                }]
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}

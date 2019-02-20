@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Visa alla dina bokningar.">
+    <title>
+        <%= title %>
+    </title>
+    <%- include("../bootstrap") %>
+</head>
+
+<body>
+    <%- include("../topbar") %>
+    <h2 class="col-auto">Mina bokningar</h2>
+    <table class="table table-borderless table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Namn</th>
+                <th scope="col">Biljetttyp</th>
+                <th scope="col">Sittplats</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const book of bookings) { %>
+            <tr>
+                <td>
+                    <%= `${book.User.Name} ${book.User.Surname}` %>
+                </td>
+                <td>
+                    <%= book.Type %>
+                </td>
+                <td>
+                    <%= book.SeatId ? book.SeatId : "-" %>
+                </td>
+                <td>
+                    <%- book.Paid ? "<span class='badge badge-success'>Betald</span>" : "<span class='badge badge-danger'>Obetald</span>" %>
+                </td>
+                <% if (!book.Paid) { %>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payModal">
+                        Betala
+                    </button>
+                </td>
+                <% } %>
+                <td>
+                    <form id="removeBooking" action="/api/v1/bookings/remove" method="post">
+                        <input hidden type="text" name="booking" id="" value="<%= book.Id %>" />
+                        <input hidden type="text" name="userId" id="" value="<%= book.User.Id %>" />
+                        <button class="btn btn-danger" type="submit">
+                            avboka
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <div id="payModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Betalning</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img style="margin-bottom: 1rem;" src="/public/img/getswish_qr.png" alt="" class="img-fluid">
+                    <p id="modalInfo">
+                        Betalning sker via swish, därför kommer inte din bokning bli markerad some betald direkt.
+                        <br>
+                        För att betala, swisha 30 eller 60 kronor (beroende på om du valt plats eller endast inträde)
+                        till 0701234567.
+                        <br>
+                        När du swishar, se till att inkludera <i>namnet som ditt konto står i</i>, så att vi vet
+                        vem som betalar.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Stäng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

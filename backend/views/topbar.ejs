@@ -1,0 +1,66 @@
+<nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+        <img id="white" src="/public/img/ntig_logo_vit.png" width="40" height="40" alt="nti logo" />
+        <img id="violet" src="/public/img/ntig_logo_violet.png" width="40" height="40" alt="nti logo">
+    </a>
+    <a class="navbar-brand" href="/">
+        <%= title %></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item <%= path === '/' ? 'active' : ''  %>">
+                <a class="nav-link" href="/">
+                    Startsida <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item <%= path === '/book' ? 'active' : ''  %>">
+                <a class="nav-link " href="/book">Boka plats</a>
+            </li>
+            <% if (isLoggedIn) { %>
+            <li class="nav-item <%= path === '/user/bookings' ? 'active' : '' %>">
+                <a href="<%= isAdmin ? '/admin/bookings' : '/user/bookings' %>" class="nav-link">
+                    <%= isAdmin ? 'Alla bokningar ' : 'Mina bokningar' %>
+                </a>
+            </li>
+            <% } %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Kontakt
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="https://discord.gg/5CGxuKB">Discord</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="mailto:???">Email</a>
+                </div>
+            </li>
+        </ul>
+        <div class="signin form-inline my-2 my-lg-0">
+            <% if (isLoggedIn) { %>
+            <a href="/auth/logout">
+                <button class="btn btn-primary my-2 my-sm-0">Logga Ut</button>
+            </a>
+
+            <% } else if (path !== "/auth/login") { %>
+            <a href="/auth/login">
+                <button class="btn btn-primary my-2 my-sm-0 mr-sm-2">
+                    Logga In
+                </button>
+            </a>
+            <% } %>
+        </div>
+        <% if (!isLoggedIn && path !== "/auth/signup") { %>
+        <div class="signin form-inline my-2 my-lg-0">
+            <a href="/auth/signup">
+                <button class="btn btn-primary my-2 my-sm-0">
+                    Skapa ett konto
+                </button>
+            </a>
+        </div>
+        <% } %>
+    </div>
+</nav>

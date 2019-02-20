@@ -1,0 +1,54 @@
+{
+    "name": "shop",
+    "version": "0.0.1",
+    "description": "Some shop backend thing.",
+    "main": "dist/Index.js",
+    "repository": "git@github.com:olvrb/shop.git",
+    "author": "Oliver Boudet <oboudet1@me.com>",
+    "license": "GPL-3.0",
+    "scripts": {
+        "start": "node dist/Index.js",
+        "build": "tsc -p .",
+        "dev": "yarn build && yarn start",
+        "lint": "tslint -p .",
+        "lint-and-fix": "tslint -p . --fix"
+    },
+    "private": false,
+    "dependencies": {
+        "@types/bcrypt": "^3.0.0",
+        "@types/express": "^4.16.0",
+        "@types/express-session": "^1.15.11",
+        "@types/passport": "^1.0.0",
+        "@types/passport-local": "^1.0.33",
+        "bcrypt": "^3.0.3",
+        "connect-typeorm": "^1.1.0",
+        "ejs": "^2.6.1",
+        "express": "^4.16.4",
+        "express-session": "^1.15.6",
+        "mailgun-js": "^0.22.0",
+        "module-alias": "^2.1.0",
+        "passport": "^0.4.0",
+        "passport-local": "^1.0.0",
+        "pg": "^7.4.3",
+        "seatsio": "^7.0.0",
+        "swagger-ui-express": "^4.0.2",
+        "typeorm": "^0.2.7",
+        "typeorm-static": "^1.1.0",
+        "typeorm-store": "^1.2.0",
+        "uuid": "^3.3.2",
+        "winston": "^3.1.0",
+        "typescript": "^3.0.3"
+    },
+    "devDependencies": {
+        "prettier": "^1.14.3",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.15.0",
+        "tslint-config-standard": "^8.0.1"
+    },
+    "_moduleAliases": {
+        "@config": "dist/Config.js",
+        "@entities": "dist/Database/Entities",
+        "@utilities": "dist/Utilities",
+        "@docs": "dist/Documentation"
+    }
+}

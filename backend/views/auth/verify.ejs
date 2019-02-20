@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Verifiera ditt konto.">
+    <%- include("../bootstrap") %>
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <%- include("../topbar") %>
+
+    <div style="margin-top: 1rem;" class="container">
+        <div class="row align-items-center card-deck">
+            <div class="mx-auto card text-white bg-danger" style="max-width: 30rem;">
+                <div class="card-header">Verifiera ditt konto.</div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Kolla din epost
+                    </h4>
+                    <p class="card-text">
+                        <form action="/auth/verify" method="post">
+                            <button type="submit" class="btn btn-primary">Skicka om.</button>
+                        </form>
+                        <a href="javascript:location.reload()" class="btn btn-primary">Jag har verifierat</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
