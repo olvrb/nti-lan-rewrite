@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "../logo.svg";
 import "../App.css";
+import { ApiClient } from "../Api/ApiClient";
 
 export class Home extends Component {
     render() {

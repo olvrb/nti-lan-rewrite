@@ -71,6 +71,8 @@ export class Signup extends Component {
     async handleFormSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         this.setState({ loading: true });
+        console.log(this.state);
+        return;
         const { status } = await ApiClient.Auth.Signup(
             this.state.email,
             this.state.password,
@@ -113,17 +115,29 @@ export class Signup extends Component {
                                 Skapa ett konto
                             </Typography>
                         </Grid>
-                        <Grid xs={12} sm={6} item>
+                        <Grid xs={12} item container>
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel>Email</InputLabel>
                                 <OutlinedInput
-                                    style={classes.fullWidthField}
                                     fullWidth
                                     className="inputField"
                                     onChange={this.handleChange}
                                     type="text"
                                     labelWidth={45}
                                     name="email"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid xs={12} item container>
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel>Lösenord</InputLabel>
+                                <OutlinedInput
+                                    fullWidth
+                                    className="inputField"
+                                    onChange={this.handleChange}
+                                    type="password"
+                                    labelWidth={70}
+                                    name="password"
                                 />
                             </FormControl>
                         </Grid>
@@ -141,8 +155,9 @@ export class Signup extends Component {
                                         className="inputField"
                                         onChange={this.handleChange}
                                         type="text"
-                                        labelWidth={45}
+                                        labelWidth={70}
                                         name="name"
+                                        autoComplete="given-name"
                                     />
                                 </FormControl>
                             </Grid>
@@ -153,11 +168,28 @@ export class Signup extends Component {
                                         className="inputField"
                                         onChange={this.handleChange}
                                         type="text"
-                                        labelWidth={45}
+                                        labelWidth={70}
+                                        autoComplete="family-name"
                                         name="surname"
                                     />
                                 </FormControl>
                             </Grid>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={12}
+                            container
+                            spacing={0}
+                            direction="column"
+                            alignItems="center"
+                            justify="center"
+                            style={{ marginBottom: "1rem" }}
+                        >
+                            <FormControl variant="outlined">
+                                <Button type="submit" variant="outlined">
+                                    Skapa konto
+                                </Button>
+                            </FormControl>
                         </Grid>
                     </Grid>
                 </form>

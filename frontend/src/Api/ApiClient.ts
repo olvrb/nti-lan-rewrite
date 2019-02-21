@@ -13,12 +13,20 @@ export class ApiClient {
             },
             body: JSON.stringify(body)
         });
+        const res = await req.json();
+        return res;
+    }
+
+    public static async Get(endpoint: string): Promise<any> {
+        const req = await fetch(endpoint, {
+            method: "GET"
+        });
         return await req.json();
     }
 
     public static Auth = {
         Login: async (email: string, password: string): Promise<any> => {
-            return await ApiClient.Post("/auth/login", { email, password });
+            return ApiClient.Post("/auth/login", { email, password });
         },
         Signup: async (
             email: string,
@@ -32,7 +40,7 @@ export class ApiClient {
             postcode: string,
             city: string
         ) => {
-            return await ApiClient.Post("/auth/signup", {
+            return ApiClient.Post("/auth/signup", {
                 email,
                 password,
                 nationalId,
@@ -44,6 +52,9 @@ export class ApiClient {
                 postcode,
                 city
             });
+        },
+        IsLoggedIn: async (): Promise<boolean> => {
+            return (await ApiClient.Get("/auth/isLoggedIn")).status;
         }
     };
 }

@@ -17,8 +17,17 @@ class App extends Component {
         super(props);
         this.ApiClient = new ApiClient();
     }
+    state = {
+        isLoggedIn: false
+    };
+
+    componentDidMount() {
+        ApiClient.Auth.IsLoggedIn().then((resp) => {
+            console.log(resp);
+            this.setState({ isLoggedIn: resp });
+        });
+    }
     public ApiClient: ApiClient;
-    componentDidMount() {}
     render() {
         return (
             <MuiThemeProvider
@@ -30,7 +39,8 @@ class App extends Component {
                 })}
             >
                 <CssBaseline />
-                <NavBar />
+                {console.log(this.state.isLoggedIn)}
+                <NavBar isLoggedIn={this.state.isLoggedIn} />
                 <BrowserRouter>
                     <Switch>
                         <Route exact={true} path="/" render={() => <Home />} />

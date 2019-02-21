@@ -22,6 +22,7 @@ import { join } from "path";
 
 import express from "express";
 import { AllBookingsHandler } from "./api/v1/bookings/all";
+import { IsLoggedInPostHandler } from "./auth/isLoggedIn";
 export function BindControllers() {
     Logger.info("Binding controllers.");
 
@@ -49,6 +50,7 @@ export function BindControllers() {
     app.post("/auth/verify", VerifyPostHandler);
 
     app.get("/api/v1/bookings/all", AllBookingsHandler);
+    app.get("/auth/isLoggedIn", IsLoggedInPostHandler);
 
     GenerateDocs();
 
